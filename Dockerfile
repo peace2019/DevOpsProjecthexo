@@ -1,5 +1,5 @@
-# استخدام صورة Node.js 18
-FROM node:18
+# استخدام صورة Node.js 18 مبنية على Alpine
+FROM node:18-alpine
 
 # تثبيت الأدوات الأساسية مثل bash و curl
 RUN apk update && apk add --no-cache bash curl
