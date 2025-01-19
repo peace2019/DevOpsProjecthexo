@@ -1,26 +1,29 @@
-# استخدام صورة Node.js
+# استخدام صورة Node.js 18
 FROM node:18-alpine
 
-# تعيين مجلد العمل في الحاوية
+# تثبيت الأدوات الأساسية مثل bash و curl
+RUN apk add --no-cache bash curl
+
+# تعيين دليل العمل داخل الحاوية
 WORKDIR /app
 
-# نسخ package.json و package-lock.json إلى المجلد
+# نسخ ملفات package.json و package-lock.json
 COPY package*.json ./
 
-# تثبيت التبعيات
-# RUN npm install
-
-# نسخ باقي الملفات إلى الحاوية
-COPY . .
+# تثبيت الاعتماديات
+RUN npm install
 
 # تثبيت TypeScript بشكل عالمي
 RUN npm install -g typescript
 
-# بناء المشروع
+# نسخ جميع الملفات من الجهاز المضيف إلى الحاوية
+COPY . .
+
+# بناء المشروع باستخدام الأمر المحدد في package.json
 RUN npm run build
 
-# فتح المنفذ الذي سيعمل عليه التطبيق
+# تحديد المنفذ الذي سيعمل عليه التطبيق
 EXPOSE 4000
 
-# تشغيل الخادم
+# تشغيل التطبيق
 CMD ["npm", "start"]
