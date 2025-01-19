@@ -1,5 +1,5 @@
 # استخدام صورة Node.js 18
-FROM FROM node:18
+FROM node:18
 
 RUN apk update
 RUN apk add --no-cache bash curl
