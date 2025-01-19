@@ -13,6 +13,9 @@ COPY package*.json ./
 # نسخ باقي الملفات إلى الحاوية
 COPY . .
 
+# تثبيت TypeScript بشكل عالمي
+RUN npm install -g typescript
+
 # بناء المشروع
 RUN npm run build
 
