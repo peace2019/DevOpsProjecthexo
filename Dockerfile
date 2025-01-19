@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # تثبيت الأدوات الأساسية مثل bash و curl
-RUN apk update && apk add --no-cache bash curl
+RUN apk add --no-cache bash curl
 
 # تعيين دليل العمل داخل الحاوية
 WORKDIR /app
