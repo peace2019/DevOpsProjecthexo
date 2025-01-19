@@ -1,8 +1,7 @@
-# استخدام صورة Node.js 18 مبنية على Debian
 FROM node:18-buster
 
-# تثبيت الأدوات الأساسية مثل bash و curl
-RUN apt-get update && apt-get install -y bash curl
+# تثبيت الأدوات الأساسية مثل bash و curl وتثبيت TypeScript بشكل عالمي
+RUN apt-get update && apt-get install -y bash curl && npm install -g typescript
 
 # تعيين دليل العمل داخل الحاوية
 WORKDIR /app
@@ -12,9 +11,6 @@ COPY package*.json ./
 
 # تثبيت الاعتماديات
 RUN npm install
-
-# تثبيت TypeScript بشكل عالمي
-RUN npm install -g typescript
 
 # نسخ جميع الملفات من الجهاز المضيف إلى الحاوية
 COPY . .
