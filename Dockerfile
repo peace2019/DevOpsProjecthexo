@@ -1,22 +1,23 @@
-FROM node:16
+# استخدام صورة Node.js
+FROM node:18-alpine
 
-# إعداد المجلد الأساسي داخل الحاوية
-WORKDIR /usr/src/app
+# تعيين مجلد العمل في الحاوية
+WORKDIR /app
 
-# نسخ ملفات الحزم
+# نسخ package.json و package-lock.json إلى المجلد
 COPY package*.json ./
 
 # تثبيت التبعيات
 RUN npm install
 
-# نسخ باقي الملفات
+# نسخ باقي الملفات إلى الحاوية
 COPY . .
 
 # بناء المشروع
-RUN hexo generate
+RUN npm run build
 
-# تعريض البورت 4000
+# فتح المنفذ الذي سيعمل عليه التطبيق
 EXPOSE 4000
 
 # تشغيل الخادم
-CMD ["hexo", "server"]
+CMD ["npm", "start"]
